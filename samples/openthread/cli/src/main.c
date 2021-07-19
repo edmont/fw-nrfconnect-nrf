@@ -7,6 +7,9 @@
 #include <zephyr.h>
 #include <logging/log.h>
 
+#include <net/openthread.h>
+#include <openthread/channel_manager.h>
+
 #if defined(CONFIG_BT)
 #include "ble.h"
 #endif
@@ -72,4 +75,6 @@ void main(void)
 	ble_enable();
 #endif
 
+	otChannelManagerSetAutoChannelSelectionInterval(openthread_get_default_instance(), 60);
+	otChannelManagerSetAutoChannelSelectionEnabled(openthread_get_default_instance(), true);
 }
